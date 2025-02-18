@@ -11,22 +11,31 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
 
   <script>
+   
     async function signup() {
-      const username = document.getElementById("signup-username").value;
-      const password = document.getElementById("signup-password").value;
-      
-      await axios.post("http://localhost:3000/signup", {
-        username: username,
-        password: password,
-      });
+  const username = document.getElementById("signup-username").value.trim();
+  const password = document.getElementById("signup-password").value.trim();
 
-      alert("You are signed up and logged in");
-    
-    }
+  if (!username || !password) {
+    alert("Username and password must not be empty.");
+    return;
+  }
+
+  await axios.post("http://localhost:3000/signup", {
+    username: username,
+    password: password,
+  });
+
+  alert("Signup successful! Please sign in.");
+}
 
     async function signin() {
-      const username = document.getElementById("signin-username").value;
-      const password = document.getElementById("signin-password").value;
+      const username = document.getElementById("signin-username").value.trim();
+      const password = document.getElementById("signin-password").value.trim();
+      if (!username || !password) {
+    alert("Username and password must not be empty.");
+    return;
+  }
 
       const response = await axios.post("http://localhost:3000/signin", {
         username: username,
